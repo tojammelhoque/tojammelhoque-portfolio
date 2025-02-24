@@ -1,11 +1,20 @@
-import Intro from "@/components/Intro";
-import Image from "next/image";
+import About from "@/components/About";
+import Education from "@/components/Education";
+import HeroSection from "@/components/HeroSection";
+import { Meteors } from "@/components/magicui/meteors";
+import Project from "@/components/Project";
+import Skills from "@/components/Skills";
 
 export default function Home() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Intro />
+    <div className="container mx-auto overflow-hidden relative">
+      <Meteors />
+      <main className="min-h-screen bg-black  ">
+        <HeroSection />
+        <About />
+        <Project />
+        <Skills />
+        <Education />
       </main>
     </div>
   );
