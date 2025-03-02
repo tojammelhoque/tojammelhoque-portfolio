@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { Button } from "./ui/button";
+import Image from "next/image";
 
 interface projectsData {
   title: string;
@@ -11,66 +12,44 @@ interface projectsData {
   technologies: string[];
 }
 
-const projectsData = [
+const projectsData: projectsData[] = [
   {
-    title: "FormVibe",
+    title: "MERN Ecommerce Store",
     description:
-      "FormVibe is a platform that allows users to create and share forms with their friends.",
-    link: "",
-    code: "",
-    previewVideo: "",
+      "MERN Ecommerce Store is a full-stack ecommerce platform that allows users to browse products, add them to the cart, and securely complete purchases.",
+    link: "https://mern-ecommerce-store-amt1.onrender.com",
+    code: "https://github.com/tojammelhoque/MERN-ecommerce-website",
+    previewVideo: "/videos/mern-e-com.mp4",
     technologies: [
-      "Next.js",
-      "React",
-      "Appwrite",
-      "TypeScript",
-      "Tailwind CSS",
-    ],
-  },
-  {
-    title: "EmojiGit CLI Tool",
-    description:
-      "EmojiGit is a CLI tool that allows you to add emojis to your git commits.",
-    link: "",
-    code: "",
-    previewVideo: "",
-    technologies: ["JavaScript", "Node.js", "Git", "Emoji", "Meow", "Inquirer"],
-  },
-  {
-    title: "CloudSpace",
-    description:
-      "CloudSpace is a platform that allows users to create and share spaces with their friends.",
-    link: "",
-    code: "",
-    previewVideo: "",
-    technologies: [
-      "Next.js",
-      "React",
+      "JavaScript",
+      "Node.js",
       "MongoDB",
       "Express",
-      "Node.js",
-      "TypeScript",
+      "React",
       "Tailwind CSS",
+      "JWT",
+      "Stripe",
     ],
   },
   {
-    title: "BlogBuddy",
+    title: "Password Manager",
     description:
-      "BlogBuddy is a platform that allows users to create and share blogs with their friends.",
-    link: "",
-    code: "",
-    previewVideo: "",
-    technologies: [
-      "Next.js",
-      "React",
-      "MongoDB",
-      "Express",
-      "Node.js",
-      "TypeScript",
-      "Tailwind CSS",
-    ],
+      "Password Manager is a platform that allows users to create and store passwords.",
+    link: "https://tojammelhoque.github.io/PasswordManager/",
+    code: "https://github.com/tojammelhoque/PasswordManager",
+    previewVideo: "/videos/PasswordManager.mp4",
+    technologies: ["React", "Tailwind CSS"],
   },
-] as const;
+  {
+    title: "Dice Roller Game",
+    description:
+      "Dice Roller Game is a fun game that allows users to roll dice and predict the outcome.",
+    link: "https://tojammelhoque.github.io/dice-game/",
+    code: "https://github.com/tojammelhoque/dice-game",
+    previewVideo: "/videos/dice-game.mp4",
+    technologies: ["React", "Tailwind CSS"],
+  },
+];
 
 function Project() {
   return (
@@ -82,13 +61,29 @@ function Project() {
             key={index}
             className="flex flex-col border rounded-md dark:border-gray-700 transition-all duration-300 hover:scale-[1.02] hover:shadow-lg"
           >
-            <video
-              src={project.previewVideo}
-              autoPlay
-              muted
-              loop
-              className="rounded-t-md"
-            />
+            {project.previewVideo.endsWith(".mp4") ? (
+              <div className="relative w-full h-[300px]">
+                {" "}
+                <video
+                  src={project.previewVideo}
+                  autoPlay
+                  muted
+                  loop
+                  className="absolute top-0 left-0 w-full h-full object-cover rounded-t-md"
+                />
+              </div>
+            ) : (
+              <div className="relative w-full h-[300px]">
+                {" "}
+                <Image
+                  src={project.previewVideo}
+                  alt={project.title}
+                  className="rounded-t-md object-cover"
+                  fill
+                />
+              </div>
+            )}
+
             <div className="flex flex-col gap-3 p-4 grow">
               <h2 className="text-xl font-bold">{project.title}</h2>
               <p className="text-sm text-gray-500 dark:text-gray-400">
