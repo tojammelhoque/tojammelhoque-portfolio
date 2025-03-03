@@ -23,10 +23,10 @@ function HeroSection() {
       );
 
     if (isMobile) {
-      window.location.href = "mailto:tojammmelhoque375@gmail.com";
+      window.location.href = "mailto:contact@tojammelhoque.com";
     } else {
       window.open(
-        "https://mail.google.com/mail/?view=cm&fs=1&to=tojammmelhoque375@gmail.com",
+        "https://mail.google.com/mail/?view=cm&fs=1&to=contact@tojammelhoque.com",
         "_blank"
       );
     }
