@@ -5,6 +5,7 @@ import { BoxReveal } from "./magicui/box-reveal";
 import { FaArrowRight } from "react-icons/fa6";
 import { GoDownload } from "react-icons/go";
 import { motion } from "framer-motion";
+import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 function HeroSection() {
   const downloadResume = () => {
@@ -97,7 +98,20 @@ function HeroSection() {
           <GoDownload className="relative z-10 text-black transition-colors duration-300 group-hover:text-white" />
         </motion.button>
       </motion.div>
-      {/* Tech Stack Marquee */}
+      <div className="flex flex-col items-center justify-center mt-10 text-white">
+        <h3 className="text-2xl font-bold">Get In Touch</h3>
+        <div className="flex gap-5 py-4">
+          <a href="https://github.com/TojammelHoque" target="_blank">
+            <FaGithub className="text-3xl " />
+          </a>
+          <a href="https://www.linkedin.com/in/tojammelhoque/" target="_blank">
+            <FaLinkedin className="text-3xl " />
+          </a>
+          <a href="https://twitter.com/_tojammelhoque" target="_blank">
+            <FaTwitter className="text-3xl " />
+          </a>
+        </div>
+      </div>
     </section>
   );
 }
