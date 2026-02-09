@@ -9,10 +9,10 @@ import { FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 
 function HeroSection() {
   const downloadResume = () => {
-    const resumePath = "/TojammelHoque.pdf";
+    const resumePath = "/Tojammel_Hoque_Resume.pdf";
     const link = document.createElement("a");
     link.href = resumePath;
-    link.download = "TojammelHoque.pdf";
+    link.download = "Tojammel_Hoque_Resume.pdf";
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -20,7 +20,7 @@ function HeroSection() {
   const handleContactClick = () => {
     const isMobile =
       /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i.test(
-        navigator.userAgent
+        navigator.userAgent,
       );
 
     if (isMobile) {
@@ -28,7 +28,7 @@ function HeroSection() {
     } else {
       window.open(
         "https://mail.google.com/mail/?view=cm&fs=1&to=contact@tojammelhoque.com",
-        "_blank"
+        "_blank",
       );
     }
   };

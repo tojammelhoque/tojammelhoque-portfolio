@@ -1,4 +1,3 @@
-
 "use client";
 
 import React from "react";
@@ -23,11 +22,11 @@ type Education = CollegeEducation | SchoolEducation;
 
 const EducationData: Education[] = [
   {
-    startDate: "2022",
-    endDate: "Expected Graduation in 2025",
-    collegeName: "Krishnath College",
+    startDate: "2020",
+    endDate: "Graduated in 2023",
+    collegeName: "Mahatma Gandhi University",
     courseName: "B.Sc. (Hons.) in Mathematics",
-    address: "Berhampore, West Bengal",
+    address: "Meghalaya",
   },
   {
     startDate: "2018",

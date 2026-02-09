@@ -14,6 +14,43 @@ interface projectsData {
 
 const projectsData: projectsData[] = [
   {
+    title: "MERN Stack Authentication",
+    description:
+      "MERN Stack Authentication is a full-stack authentication platform that allows users to register, login, and manage their accounts.",
+    link: "https://mern-auth-frontend-yi1u.onrender.com/",
+    code: "https://github.com/tojammelhoque/mern-stack-authentication",
+    previewVideo: "/videos/Mern-Auth.mp4",
+    technologies: [
+      "Node.js",
+      "Express.js",
+      "TypeScript",
+      "MongoDB",
+      "Mongoose",
+      "React",
+      "Vite",
+      "Tailwind CSS",
+      "JWT (JSON Web Tokens)",
+      "bcryptjs",
+      "HTTP-only Cookies",
+      "Resend API",
+      "Zustand",
+      "React Hook Form",
+      "Zod",
+      "Axios",
+      "React Icons",
+      "React Hot Toast",
+      "React Router DOM",
+      "Docker",
+      "Docker Compose",
+      "GitHub Actions",
+      "express-rate-limit",
+      "validator",
+      "cookie-parser",
+      "cors",
+      "dotenv",
+    ],
+  },
+  {
     title: "MERN Ecommerce Store",
     description:
       "MERN Ecommerce Store is a full-stack ecommerce platform that allows users to browse products, add them to the cart, and securely complete purchases.",
