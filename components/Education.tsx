@@ -31,8 +31,8 @@ const EducationData: Education[] = [
   {
     startDate: "2018",
     endDate: "2020",
-    schoolName: "Rukapur High School (H.S.)",
-    address: "Rukapur, West Bengal",
+    schoolName: "Rukanpur High School (H.S.)",
+    address: "Rukanpur, West Bengal",
     courseName:
       "12th Science (PCMB - Physics, Chemistry, Mathematics, Biology)",
   },
