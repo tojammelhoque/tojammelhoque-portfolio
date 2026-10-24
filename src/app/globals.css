@@ -1,0 +1,202 @@
+@import 'tailwindcss';
+
+@theme {
+  /* ---- Brand palette ---- */
+  --color-accent: #2563eb; /* Electric Blue: buttons, links and highlights on light backgrounds */
+  --color-paper: #f8fafc; /* Off-White: page background, and text on dark sections */
+  --color-highlight: #bef264; /* Fresh Lime: highlights on dark sections and small badges */
+  --color-ink: #0f172a; /* Deep Navy: text on light backgrounds, and every dark section */
+
+  /* ---- Neutrals derived from the palette ---- */
+  --color-paper-2: #f1f5f9; /* subtle panels and avatar backgrounds */
+  --color-ink-2: #475569; /* secondary text */
+  --color-ink-3: #64748b; /* labels and captions */
+  --color-line: #e2e8f0; /* borders and dividers */
+  --color-dark-line: #1e293b; /* borders inside dark sections */
+  --color-dark-muted: #94a3b8; /* muted text inside dark sections */
+
+  /* ---- Typography ---- */
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif; /* body text and headings */
+  --font-serif: 'Instrument Serif', Georgia, serif; /* italic accent words in headings */
+  --font-mono:
+    'JetBrains Mono Variable', ui-monospace, 'Cascadia Code', Menlo, monospace; /* labels and tags */
+
+  /* ---- Corner radii used by rounded-sm / md / lg / xl ---- */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.625rem;
+  --radius-xl: 0.875rem;
+
+  /* ---- Marquee: a row that slides on its own. --marquee-duration sets the speed ---- */
+  --animate-marquee: marquee var(--marquee-duration, 70s) linear infinite;
+  --animate-marquee-reverse: marquee-reverse var(--marquee-duration, 80s) linear infinite;
+
+  @keyframes marquee {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  @keyframes marquee-reverse {
+    from {
+      transform: translateX(-50%);
+    }
+    to {
+      transform: translateX(0);
+    }
+  }
+}
+
+@layer base {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* Lenis smooth scrolling */
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  /* Selected text is highlighted in Fresh Lime */
+  ::selection {
+    background: var(--color-highlight);
+    color: var(--color-ink);
+  }
+
+  img::selection {
+    background: transparent;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Sections that links jump to (such as /#contact) stop below the fixed navbar */
+  [id] {
+    scroll-margin-top: 4.5rem;
+  }
+
+  /* Tailwind v4 resets buttons to the default cursor */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+/* Centred page container with responsive side padding */
+@utility container-site {
+  width: 100%;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 768px) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Small uppercase label in JetBrains Mono. Add eyebrow-on-dark inside dark sections. */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--eyebrow-color, var(--color-ink-3));
+}
+
+@utility eyebrow-on-dark {
+  --eyebrow-color: var(--color-dark-muted);
+}
+
+/* Italic accent word inside a heading, set in Instrument Serif.
+   The serif looks smaller than Inter at the same size, so it is scaled up a little. */
+@utility serif-accent {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.12em;
+  letter-spacing: -0.01em;
+}
+
+/* Underline that sweeps in on hover and focus */
+@utility link-sweep {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+/* Line mask reveal: the inner span is moved by GSAP */
+@utility mask-line {
+  display: block;
+  overflow: hidden;
+
+  & > span {
+    display: block;
+    will-change: transform;
+  }
+}
+
+/* Service cards alternate between a light and a dark theme. */
+@utility service-card {
+  --card-bg: #fff;
+  --card-fg: var(--color-ink);
+  --card-muted: var(--color-ink-2);
+  --card-line: var(--color-line);
+  --card-outline: var(--color-slate-300);
+
+  &:nth-child(even) {
+    --card-bg: var(--color-ink);
+    --card-fg: var(--color-paper);
+    --card-muted: var(--color-dark-muted);
+    --card-line: var(--color-dark-line);
+    --card-outline: var(--color-slate-700);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
