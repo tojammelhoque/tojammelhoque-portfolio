@@ -10,10 +10,13 @@
 next-env.d.ts
 
 # env files
-.env*.local
+# env files (never commit real keys)
+.env
+.env.*
+!.env.example
 
-# deployment
-.vercel
+
+
 
 # misc
 .DS_Store

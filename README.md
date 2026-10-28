@@ -1,96 +1,136 @@
+<div align="center">
+
 # Tojammel Hoque — Portfolio
 
-Personal portfolio and freelance website for a full-stack web developer. It presents services, selected work, process and contact details, with scroll-driven animation throughout.
+**Full-stack web developer building fast, clean and reliable web apps.**
+
+[Live site](https://tojammelhoque.com) · [LinkedIn](https://www.linkedin.com/in/tojammelhoque) · [Instagram](https://www.instagram.com/qodexdev)
+
+Next.js 16 · React 19 · TypeScript · Tailwind CSS 4 · GSAP · Resend
+
+</div>
+
+---
+
+## About
+
+A personal portfolio and freelance website. It presents my services, selected work, process and contact details, with scroll-driven animation throughout. Visitors can book a call or send a project enquiry straight from the page.
+
+## Features
+
+- **Scroll-synced animation.** Scrubbed GSAP timelines play forward and backward with the scrollbar:
+  - Stacked service cards that shrink and dim as the next one slides over
+  - A Strategy → Development → Testing → Launch stepper
+  - A portrait that wipes in and drifts inside its frame
+  - A pinned, scroll-driven showcase of selected projects with live demo and GitHub links
+- **Smooth scrolling** with Lenis.
+- **Marquees** for tools and reviews, built in pure CSS with no JavaScript.
+- **Cal.com booking calendar** embedded on the page and loaded only when you scroll near it.
+- **Contact form** with a server route, email delivery through Resend, spam protection and a thank-you page.
+- **SEO basics on every page:** unique title and description, canonical address, share preview image, sitemap and `robots.txt`.
+- **Accessible:** respects `prefers-reduced-motion`, so animations are skipped and content shows in its final state.
+- **Responsive** from small phones to wide desktops.
 
 ## Tech stack
 
-- **Next.js 16** (App Router), **React 19**, **TypeScript**
-- **Tailwind CSS 4** for styling
-- **Inter**, **Instrument Serif** and **JetBrains Mono**, self-hosted through Fontsource
-- **GSAP + ScrollTrigger** for animation, **Lenis** for smooth scrolling
-
-## Highlights
-
-- Scroll-synced animation built from scrubbed GSAP timelines, so it plays forward and backward with the scrollbar.
-  - Stacked service cards that shrink and dim as the next card slides over them
-  - A Strategy → Development → Testing → Launch stepper that hands over step by step
-  - A portrait that wipes in and drifts inside its frame
-  - A pinned, scroll-driven showcase of selected projects, with live demo and GitHub links
-- Two icon marquees and a reviews marquee that slide on their own (pure CSS, no JavaScript).
-- A Cal.com booking calendar embedded on the page, loaded only when you scroll near it.
-- A contact form with a server route, spam protection and a thank-you page, an FAQ and an education section.
-- SEO basics on every page: unique title and description, canonical address, share preview image, sitemap and robots.txt.
-- Respects `prefers-reduced-motion`: animations are skipped and content is shown in its final state.
-- Responsive from small phones to wide desktops.
+| Area | Tools |
+| --- | --- |
+| Framework | Next.js 16 (App Router), React 19, TypeScript |
+| Styling | Tailwind CSS 4 |
+| Animation | GSAP + ScrollTrigger, Lenis |
+| Fonts | Inter, Instrument Serif, JetBrains Mono (self-hosted with Fontsource) |
+| Email | Resend |
+| Tooling | ESLint, Prettier |
 
 ## Getting started
 
-Requires Node.js 20.9 or newer.
+Requires **Node.js 20.9 or newer**.
 
 ```bash
+git clone https://github.com/tojammelhoque/tojammelhoque-portfolio.git
+cd tojammelhoque-portfolio
 npm install
+cp .env.example .env.local   # then fill in the values
 npm run dev
 ```
 
-Open http://localhost:3000.
+Open [http://localhost:3000](http://localhost:3000).
 
-## Scripts
+### Scripts
 
-| Command                | Description                          |
-| ---------------------- | ------------------------------------ |
-| `npm run dev`          | Start the development server         |
-| `npm run build`        | Create a production build            |
-| `npm run start`        | Serve the production build           |
-| `npm run lint`         | Lint with ESLint                     |
-| `npm run typecheck`    | Type-check with TypeScript           |
-| `npm run format`       | Format the code with Prettier        |
+| Command | Description |
+| --- | --- |
+| `npm run dev` | Start the development server |
+| `npm run build` | Create a production build |
+| `npm run start` | Serve the production build |
+| `npm run lint` | Lint with ESLint |
+| `npm run typecheck` | Type-check with TypeScript |
+| `npm run format` | Format the code with Prettier |
 | `npm run format:check` | Check formatting without changing it |
+
+## Environment variables
+
+Copy `.env.example` to `.env.local`. Never commit real keys.
+
+| Variable | Required | Description |
+| --- | :---: | --- |
+| `RESEND_API_KEY` | Yes | API key from [resend.com/api-keys](https://resend.com/api-keys) |
+| `CONTACT_TO_EMAIL` | Yes | Inbox that receives enquiries |
+| `CONTACT_FROM_EMAIL` | No | Sender such as `Portfolio enquiries <contact@yourdomain.com>`. Needs a domain verified in Resend. Defaults to `onboarding@resend.dev`, which can only deliver to your own Resend account email. |
+
+Without `RESEND_API_KEY`, the form falls back to opening the visitor's email app, so no enquiry is lost.
+
+## Contact form and spam protection
+
+The form posts to `src/app/api/contact/route.ts`, which sends the enquiry through the Resend API and then redirects the visitor to a thank-you page. The API key stays on the server.
+
+Spam protection lives in `src/lib/contact/`:
+
+- A hidden honeypot field that only bots fill in
+- A timing check that rejects forms sent faster than a person could fill them in
+- A per-visitor rate limit, kept in memory only and never saved
+- A limit on links per message
+- A check that the request comes from this site
 
 ## Project structure
 
 ```
 src/
-  app/          Pages (home, privacy, thank-you, 404), the contact API route, sitemap, robots, styles
+  app/          Pages (home, privacy, thank-you, 404), contact API route, sitemap, robots, styles
   components/   Reusable pieces (Marquee, SmoothScroll, CaseStudyModal, PageShell, ...)
-  sections/     One file per section of the home page, plus the navbar and footer
-  lib/          Content (data.ts), site settings (site.ts), scroll helpers and the contact form logic
-public/         Static files: the portrait (images/profile.jpg) and the share preview (og-image.jpg)
+  sections/     One file per home page section, plus the navbar and footer
+  lib/          Content (data.ts), site settings (site.ts), scroll helpers, contact form logic
+public/         Static files: portrait (images/profile.jpg) and share preview (og-image.jpg)
 ```
 
 ## Editing content
 
-- Text, services, projects, process steps, reviews and contact details live in `src/lib/data.ts`.
-- The tool icons shown in the marquees and the technology section live in `src/lib/tech.ts`.
-- The Cal.com booking link is `booking` in `src/lib/data.ts`.
-- The cards in `reviews` are marked `sample: true`. Replace them with real client feedback and remove that flag. An empty list hides the section.
-- FAQ answers (`faqs`) and education (`education`) also live in `src/lib/data.ts`.
-- The portrait is `public/images/profile.jpg` (4:5 ratio works best).
-- The share preview shown when the link is posted on WhatsApp, LinkedIn and similar is `public/og-image.jpg` (1200 × 630 px).
-- The site address, default title and description live in `src/lib/site.ts`. Every page builds its own title and description with `buildPageMetadata`.
-- Colours and fonts are defined once, in the `@theme` block of `src/app/globals.css`: Electric Blue `#2563EB`, Off-White `#F8FAFC`, Fresh Lime `#BEF264` and Deep Navy `#0F172A`.
+- Text, services, projects, process steps, reviews, FAQs, education and contact details live in `src/lib/data.ts`.
+- Tool icons shown in the marquees and technology section live in `src/lib/tech.ts`.
+- Site address, default title and description live in `src/lib/site.ts`.
+- Colours and fonts are defined in the `@theme` block of `src/app/globals.css`.
 
-## Contact form and spam protection
+### Brand colours
 
-The form sends its data to `src/app/api/contact/route.ts`, which emails the enquiry over SMTP (set up for Gmail) and then sends the visitor to the thank-you page. The mail account stays in the backend. Visitors only ever see the public address in `src/lib/data.ts`.
+| Colour | Hex |
+| --- | --- |
+| Electric Blue | `#2563EB` |
+| Off-White | `#F8FAFC` |
+| Fresh Lime | `#BEF264` |
+| Deep Navy | `#0F172A` |
 
-1. In your Google account, turn on 2-Step Verification, then create an App password at https://myaccount.google.com/apppasswords.
-2. Copy `.env.example` to `.env.local` and fill in `SMTP_USER` (the Gmail address) and `SMTP_PASSWORD` (the App password).
-3. Add the same variables in your hosting settings, then redeploy.
-4. Until they are set, the form falls back to opening the visitor's email app, so no enquiry is lost.
+## Contact
 
-Spam protection, all in `src/lib/contact/`:
+Have a project in mind? Let's talk.
 
-- a hidden field that only bots fill in (honeypot)
-- a timing check that rejects forms sent faster than a person could fill them in
-- a rate limit per visitor (kept in memory only, never saved)
-- a limit on links in a message, and a check that the request comes from this site
+- Website: [tojammelhoque.com](https://tojammelhoque.com)
+- LinkedIn: [tojammelhoque](https://www.linkedin.com/in/tojammelhoque)
+- Instagram: [@qodexdev](https://www.instagram.com/qodexdev)
 
-The privacy policy page (`/privacy`) describes these protections and names Google (Gmail) and Cal.com. Update it if you change providers or add analytics.
+---
 
-## Search Console
+<div align="center">
 
-The sitemap is served at `https://tojammelhoque.com/sitemap.xml` and `robots.txt` points to it. After the site is live:
+Built by **Tojammel Hoque** · `<QodexDev/>` — Building Digital Solutions
 
-1. Open [Google Search Console](https://search.google.com/search-console) and add the property `tojammelhoque.com` (the domain option, verified with a DNS record).
-2. Open **Sitemaps**, enter `sitemap.xml` and press **Submit**.
-3. Use **URL inspection** on the home page and request indexing.
+</div>

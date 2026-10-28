@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/lib/site'
 import { NextResponse } from 'next/server'
 import { getClientIp } from '@/lib/contact/getClientIp'
 import { sendEnquiryEmail } from '@/lib/contact/sendEnquiryEmail'
